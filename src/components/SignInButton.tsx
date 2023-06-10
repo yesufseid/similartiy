@@ -13,6 +13,7 @@ const SignInButton:FC=({})=>{
     const signInWithGoogle=async()=>{
         setLoading(true)
         try {
+            
             await signIn('google')
         } catch (error) {
             toast({
