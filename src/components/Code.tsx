@@ -1,17 +1,19 @@
 'use client'
 import {FC,useEffect,useState} from 'react'
-import {Highlight, type Language} from 'prism-react-renderer'
+import {Highlight, themes} from 'prism-react-renderer'
+// import { type Language }from 'prism-react-renderer'
 import { useTheme } from 'next-themes'
-import darkTheme from "prism-react-renderer/themes/nightOwl"
-import lightTheme from 'prism-react-renderer/themes/nightOwlLight'
+import darkTheme from 'prism-react-renderer'
+import lightTheme from 'prism-react-renderer'
 
 
+ 
 
 
 interface codeProps{
     code:string
     show:boolean
-    language:Language
+    language:string
     animationDelay?:number
     animated?:boolean
 }
@@ -37,11 +39,11 @@ const Code:FC<codeProps>=({code,show,language,animationDelay,animated})=>{
     },[code,show,animated,animationDelay])
 
     //number of line
-    const lines=text.split(/\r\n|\r|\n/)
+    const lines=text.split(/\r\n|\r|\n/).length
     const theme=applicationTheme==='light'?lightTheme:darkTheme
 
 
-    return <Highlight {...defaultProps} code={text} language={language} theme={theme}>
+    return <Highlight {...defaultProps}  code={text} language={language} theme={theme}>
         {({className,tokens,getLineProps,getTokenProps})=><pre className={className+'translate-all w-fit bg-transparent duration-100 py-0 no-scrollbar'}
           style={{
             maxHeight:show? lines * 24 : 0,
@@ -58,6 +60,11 @@ const Code:FC<codeProps>=({code,show,language,animationDelay,animated})=>{
                   style={{position:'relative'}}
                   {...rest}
                 >
+                  {line.map((token,index)=>{
+                    //eslint-disable-next-line no-unused-vars
+                    const {key,...props}=getTokenProps({token,i})
+                    return <span key={index} {...props}></span>
+                  })}
 
                 </div>
             )

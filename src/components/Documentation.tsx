@@ -2,8 +2,12 @@ import  {Tabs, TabsList, TabsTrigger, TabsContent} from "@/ui/Tabs";
 import { Dumbbell } from "lucide-react";
 import { FC } from "react";
 import SimpleBar  from 'react'
+import Code from "./Code"
+import {nodejs} from '@/helpers/Doucmentation-Code'
 
-const Documentaion:FC=()=>{
+
+
+const Documentation:FC=()=>{
   return <Tabs defaultValue="nodejs" className="max-w-2xl w-full"> 
       <TabsList>
          <TabsTrigger value="nodejs">Node Js</TabsTrigger>
@@ -11,7 +15,7 @@ const Documentaion:FC=()=>{
       </TabsList>
       <TabsContent  value="nodejs" >
            {/* <SimpleBar></SimpleBar> */}
-           <Code />
+           <Code  language="javaScript" code={nodejs} show />
       </TabsContent>
       <TabsContent value="python">
 
@@ -20,4 +24,4 @@ const Documentaion:FC=()=>{
 }
 
 
-export default Documentaion
+export default Documentation
