@@ -16,7 +16,7 @@ const page:FC=()=>{
          <div className="flex flex-col items-center gap-6 mt-24">
               <LargeHeading> Making a requist</LargeHeading>
               <Paragraph>api/v1/similarity</Paragraph>
-     
+              <Documentation />
             
          </div>
     </div>

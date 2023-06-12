@@ -1,14 +1,17 @@
 'use client'
 import {FC,useEffect,useState} from 'react'
-import {Highlight, themes} from 'prism-react-renderer'
+import {Highlight,themes} from "prism-react-renderer";
+// import {Highlight, themes} from 'prism-react-renderer'
 // import { type Language }from 'prism-react-renderer'
 import { useTheme } from 'next-themes'
-import darkTheme from 'prism-react-renderer'
-import lightTheme from 'prism-react-renderer'
 
 
- 
 
+
+
+
+const darkTheme =themes.nightOwl
+const lightTheme =themes.nightOwlLight
 
 interface codeProps{
     code:string
@@ -27,14 +30,14 @@ const Code:FC<codeProps>=({code,show,language,animationDelay,animated})=>{
            let i=0
            setTimeout(()=>{
             const interValid=setInterval(()=>{
-                setTaxt(code.slice(0,1))
+                setTaxt(code.slice(0,i))
                 i++
                 if(i>code.length){
                     clearInterval(interValid)
                 }
             },15)
             return ()=>clearInterval(interValid)
-           },animationDelay ||  150)
+           },animationDelay || 15)
         }
     },[code,show,animated,animationDelay])
 
@@ -43,7 +46,7 @@ const Code:FC<codeProps>=({code,show,language,animationDelay,animated})=>{
     const theme=applicationTheme==='light'?lightTheme:darkTheme
 
 
-    return <Highlight {...defaultProps}  code={text} language={language} theme={theme}>
+    return <Highlight code={text} language={language} theme={theme}>
         {({className,tokens,getLineProps,getTokenProps})=><pre className={className+'translate-all w-fit bg-transparent duration-100 py-0 no-scrollbar'}
           style={{
             maxHeight:show? lines * 24 : 0,
